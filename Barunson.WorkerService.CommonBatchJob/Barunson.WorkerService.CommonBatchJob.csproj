@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker;Microsoft.NET.Sdk.Publish">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-Barunson.WorkerService.CommonBatchJob-E89F2BFA-A3B8-4F6A-8AF7-3D13B52697B4</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <ApplicationInsightsResourceId>/subscriptions/d7b85163-59b0-4a5d-a855-b6e3411a6b13/resourceGroups/barunson-integration-rg/providers/microsoft.insights/components/barun-app-insights</ApplicationInsightsResourceId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Cronos" Version="0.7.1" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.46" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
+    <PackageReference Include="SMBLibrary" Version="1.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Barunson.WorkerService.Common\Barunson.WorkerService.Common.csproj" />
+  </ItemGroup>
+</Project>

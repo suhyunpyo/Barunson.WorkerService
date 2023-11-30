@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "secretStore": null,
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.KeyVault/vaults/barunsecret",
+      "type": "secrets.keyVault",
+      "connectionId": "VaultUri"
+    },
+    "secrets2": {
+      "type": "secrets.user"
+    },
+    "mssql1": {
+      "secretStore": "AzureKeyVault",
+      "resourceId": null,
+      "type": "mssql.onprem",
+      "connectionId": "ConnectionStrings:BarShopDBConn"
+    },
+    "mssql2": {
+      "secretStore": "AzureKeyVault",
+      "type": "mssql.onprem",
+      "connectionId": "ConnectionStrings:BarunsonDBConn"
+    },
+    "appInsights1": {
+      "secretStore": "LocalSecretsFile",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/microsoft.insights/components/barun-app-insights",
+      "type": "appInsights.azure",
+      "connectionId": "APPLICATIONINSIGHTS_CONNECTION_STRING"
+    }
+  }
+}

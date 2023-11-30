@@ -1,0 +1,84 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "containerGroupName": {
+      "defaultValue": "lmsbatchjob",
+      "type": "String",
+      "metadata": {
+        "description": "Container Group name."
+      }
+    },
+    "azurecrImageName": {
+      "defaultValue": "baruncr.azurecr.io/barunsonworkerservicelmsbatchjob:latest",
+      "type": "String",
+      "metadata": {
+        "description": "Container Registry Image name."
+      }
+    },
+    "userAssignedIdentity": {
+      "type": "String",
+      "defaultValue": "/subscriptions/d7b85163-59b0-4a5d-a855-b6e3411a6b13/resourceGroups/barunson-integration-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/barun-app-service-id"
+    },
+    "virtualNetworks_externalid": {
+      "defaultValue": "/subscriptions/d7b85163-59b0-4a5d-a855-b6e3411a6b13/resourceGroups/barunson-svc-rg/providers/Microsoft.Network/virtualNetworks/barunson-svc-vnet/subnets/container-Subnet",
+      "type": "String",
+      "metadata": {
+        "description": "Container Virtual Network Resource Id."
+      }
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "type": "Microsoft.ContainerInstance/containerGroups",
+      "apiVersion": "2021-10-01",
+      "name": "[parameters('containerGroupName')]",
+      "location": "koreacentral",
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "[parameters('userAssignedIdentity')]": {}
+        }
+      },
+      "properties": {
+        "sku": "Standard",
+        "containers": [
+          {
+            "name": "[parameters('containerGroupName')]",
+            "properties": {
+              "image": "[parameters('azurecrImageName')]",
+              "ports": [
+                {
+                  "protocol": "TCP",
+                  "port": 80
+                }
+              ],
+              "environmentVariables": [],
+              "resources": {
+                "requests": {
+                  "memoryInGB": 1.5,
+                  "cpu": 1
+                }
+              }
+            }
+          }
+        ],
+        "initContainers": [],
+        "imageRegistryCredentials": [
+          {
+            "server": "baruncr.azurecr.io",
+            "identity": "[parameters('userAssignedIdentity')]"
+          }
+        ],
+        "restartPolicy": "Never",
+        "osType": "Linux",
+        "subnetIds": [
+          {
+            "id": "[parameters('virtualNetworks_externalid')]"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "profiles": {
+    "Barunson.WorkerService.MCardResourceCleanJob": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "DockerfileRunArguments": "-v mcardsharevolume:/mnt/mcardshare "
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      },
+      "distributionName": ""
+    }
+  }
+}
